@@ -12,7 +12,8 @@
 stamp-h*
 Makefile
 libtool
-config.h*
-configure
-aclocal.m4
-Makefile.in
+config.h
+confdefs.h
+./configure
+./aclocal.m4
+./Makefile.in
