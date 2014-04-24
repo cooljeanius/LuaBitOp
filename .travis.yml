@@ -24,7 +24,7 @@ matrix:
 install:
   - git clone git://github.com/LuaDist/Tools.git ~/_tools
   - ~/_tools/travis/travis install
-  - "sudo apt-get install lua40"
+  - "sudo apt-get install lua50"
 
 # Bootstap
 before_script:
