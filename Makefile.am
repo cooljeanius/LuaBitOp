@@ -19,7 +19,7 @@ LUA=@LUA@
 
 CC= @CC@
 CCOPT= -O2 -fomit-frame-pointer
-CCWARN= -Wall
+CCWARN= -Wall -Wimplicit -Wextra
 SOCC= $(CC) -shared
 SOCFLAGS= -fPIC $(CCOPT) $(CCWARN) $(DEFINES) $(INCLUDES) $(CFLAGS)
 SOLDFLAGS= -fPIC $(LDFLAGS) $(LIBS)
@@ -32,7 +32,7 @@ MODSO= $(MODNAME).so
 
 ## Because we do not use automake-standard rules for compiling, the source
 ## has to be specified under "EXTRA_DIST" instead:
-EXTRA_DIST = bit.c
+EXTRA_DIST = $(MODNAME).c $(MODNAME).h
 
 check_SCRIPTS = bittest.lua nsievebits.lua md5test.lua
 
@@ -62,7 +62,7 @@ all: $(MODSO)
 macosx:
 	$(MAKE) all "SOCC=MACOSX_DEPLOYMENT_TARGET=10.4 $(CC) -dynamiclib -single_module -undefined dynamic_lookup"
 
-$(MODNAME).o: $(MODNAME).c
+$(MODNAME).o: $(MODNAME).c $(MODNAME).h
 	$(CC) $(SOCFLAGS) -c -o $@ $<
 
 $(MODSO): $(MODNAME).o
