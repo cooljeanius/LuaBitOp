@@ -1,4 +1,5 @@
 *DS_Store*
+*~
 *.log
 *.status
 *.cache
@@ -14,8 +15,21 @@ Makefile
 libtool
 config.h
 confdefs.h
-./configure
-./aclocal.m4
-./Makefile.in
+conftest*
 build/*
 *.build
+CMakeCache.txt
+CMakeFiles/*
+# Using CMake causes these files to become generated ones:
+bittest.lua
+md5test.lua
+nsievebits.lua
+# More CMake junk:
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CTestTestfile.cmake
+DartConfiguration.tcl
+cmake_install.cmake
+# Distribution:
+luabitop-*.*.*/*
+*.tar.gz

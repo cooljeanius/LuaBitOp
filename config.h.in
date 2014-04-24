@@ -6,6 +6,42 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
+/* Define to 1 if you have the <lauxlib.h> header file. */
+#undef HAVE_LAUXLIB_H
+
+/* Define to 1 if you have the `lua' library (-llua). */
+#undef HAVE_LIBLUA
+
+/* Define to 1 if you have the <luaconf.h> header file. */
+#undef HAVE_LUACONF_H
+
+/* Define to 1 if you have the `luaL_checknumber' function. */
+#undef HAVE_LUAL_CHECKNUMBER
+
+/* Define to 1 if you have the `luaL_error' function. */
+#undef HAVE_LUAL_ERROR
+
+/* Define to 1 if you have the `luaL_setfuncs' function. */
+#undef HAVE_LUAL_SETFUNCS
+
+/* Define to 1 if you have the `lua_createtable' function. */
+#undef HAVE_LUA_CREATETABLE
+
+/* Define to 1 if you have the `lua_gettop' function. */
+#undef HAVE_LUA_GETTOP
+
+/* Define to 1 if you have the <lua.h> header file. */
+#undef HAVE_LUA_H
+
+/* Define to 1 if you have the `lua_pushlstring' function. */
+#undef HAVE_LUA_PUSHLSTRING
+
+/* Define to 1 if you have the `lua_pushnumber' function. */
+#undef HAVE_LUA_PUSHNUMBER
+
+/* Define to 1 if you have the `lua_type' function. */
+#undef HAVE_LUA_TYPE
+
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
@@ -36,9 +72,6 @@
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #undef LT_OBJDIR
-
-/* Define to 1 if your C compiler doesn't accept -c and -o together. */
-#undef NO_MINUS_C_MINUS_O
 
 /* Name of package */
 #undef PACKAGE
