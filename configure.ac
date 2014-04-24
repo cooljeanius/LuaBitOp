@@ -44,9 +44,7 @@ PKG_CHECK_MODULES([LUA],
                   [HAVE_LUA=yes
                    CFLAGS="${CFLAGS} ${LUA_CFLAGS}"
                    CPPFLAGS="${CPPFLAGS} ${LUA_CFLAGS}"
-                   LIBS="${LIBS} ${LUA_LIBS}"],
-                  [HAVE_LUA=no
-                   AC_MSG_ERROR([lua is required to build])])
+                   LIBS="${LIBS} ${LUA_LIBS}"])
 AC_SUBST([LUA_CFLAGS])
 AC_SUBST([LUA_LIBS])
 AC_CHECK_LIB([lua],[luaL_error])
