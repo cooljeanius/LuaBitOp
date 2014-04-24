@@ -44,9 +44,20 @@ PKG_CHECK_MODULES([LUA],
                   [HAVE_LUA=yes
                    CFLAGS="${CFLAGS} ${LUA_CFLAGS}"
                    CPPFLAGS="${CPPFLAGS} ${LUA_CFLAGS}"
-                   LIBS="${LIBS} ${LUA_LIBS}"])
-AC_SUBST([LUA_CFLAGS])
-AC_SUBST([LUA_LIBS])
+                   LIBS="${LIBS} ${LUA_LIBS}"
+                   AC_SUBST([LUA_CFLAGS])
+                   AC_SUBST([LUA_LIBS])],[
+  # If the previous check failed, see if the pkg name includes the version:
+  PKG_CHECK_MODULES([LUA51],
+                    [lua5.1 >= 5.1],
+                    [HAVE_LUA=yes
+                     CFLAGS="${CFLAGS} ${LUA51_CFLAGS}"
+                     CPPFLAGS="${CPPFLAGS} ${LUA51_CFLAGS}"
+                     LIBS="${LIBS} ${LUA51_LIBS}"
+                     AC_SUBST([LUA51_CFLAGS])
+                     AC_SUBST([LUA51_LIBS])
+  ])
+])
 AC_CHECK_LIB([lua],[luaL_error])
 
 # Checks for header files.

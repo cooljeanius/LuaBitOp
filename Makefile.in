@@ -281,6 +281,8 @@ LTLIBOBJS = @LTLIBOBJS@
 
 # Lua executable name. Used to find the install path and for testing.
 LUA = @LUA@
+LUA51_CFLAGS = @LUA51_CFLAGS@
+LUA51_LIBS = @LUA51_LIBS@
 LUA_CFLAGS = @LUA_CFLAGS@
 LUA_LIBS = @LUA_LIBS@
 MAINT = @MAINT@
