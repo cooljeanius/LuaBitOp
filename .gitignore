@@ -13,6 +13,10 @@
 stamp-h*
 Makefile
 libtool
+*libs/bit.*
+*.la
+*.lo
+*deps/*.*o
 config.h
 confdefs.h
 conftest*

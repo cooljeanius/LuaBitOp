@@ -21,7 +21,9 @@ AC_PROG_CPP
 AC_PROG_CXX
 AC_PROG_GCC_TRADITIONAL
 AC_PROG_LN_S
+AC_PROG_MKDIR_P
 AC_PROG_INSTALL
+AM_PROG_INSTALL_STRIP
 AC_DEFUN([AC_REQUIRE_RANLIB],[
   AC_REQUIRE([AC_PROG_RANLIB])
 ])
@@ -43,13 +45,18 @@ PKG_CHECK_MODULES([LUA],
                    CFLAGS="${CFLAGS} ${LUA_CFLAGS}"
                    CPPFLAGS="${CPPFLAGS} ${LUA_CFLAGS}"
                    LIBS="${LIBS} ${LUA_LIBS}"],
-                  [HAVE_LUA=no])
+                  [HAVE_LUA=no
+                   AC_MSG_ERROR([lua is required to build])])
 AC_SUBST([LUA_CFLAGS])
 AC_SUBST([LUA_LIBS])
 AC_CHECK_LIB([lua],[luaL_error])
 
 # Checks for header files.
 AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h stdio.h])
+if test "x${ac_cv_header_lua_h}" = "xno"; then
+  test ! -z "${ac_cv_header_lua_h}"
+  AC_MSG_ERROR([lua.h is required, but it was not found])
+fi
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_INT32_T

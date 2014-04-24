@@ -6,7 +6,7 @@
 ACLOCAL_AMFLAGS = -I m4 --install
 
 # Include path where lua.h, luaconf.h and lauxlib.h reside:
-AM_CPPFLAGS=-I/usr/local/include
+AM_CPPFLAGS=-I/usr/local/include -I. -I$(top_srcdir)
 
 DEFINES= @DEFS@
 
@@ -21,7 +21,7 @@ CC= @CC@
 CCOPT= -O2 -fomit-frame-pointer
 CCWARN= -Wall -Wimplicit -Wextra
 SOCC= $(CC) -shared
-SOCFLAGS= -fPIC $(CCOPT) $(CCWARN) $(DEFINES) $(INCLUDES) $(CFLAGS)
+SOCFLAGS= -fPIC $(CCOPT) $(CCWARN) $(DEFINES) $(AM_CPPFLAGS) $(INCLUDES) $(CFLAGS)
 SOLDFLAGS= -fPIC $(LDFLAGS) $(LIBS)
 RM= rm -f
 INSTALL=@INSTALL@ 
@@ -30,10 +30,19 @@ INSTALLPATH= $(LUA) installpath.lua
 MODNAME= bit
 MODSO= $(MODNAME).so
 
-## Because we do not use automake-standard rules for compiling, the source
-## has to be specified under "EXTRA_DIST" instead:
-EXTRA_DIST = $(MODNAME).c $(MODNAME).h
+## cannot use the MODNAME makefile variable here because that messes stuff
+## up:
+pkglib_LTLIBRARIES = bit.la
 
+bit_la_SOURCES = bit.c bit.h
+
+pkginclude_HEADERS = bit.h
+
+bit_la_LDFLAGS = -module
+
+EXTRA_DIST = doc
+
+## Tests:
 check_SCRIPTS = bittest.lua nsievebits.lua md5test.lua
 
 EXTRA_DIST += bittest_orig.lua nsievebits_orig.lua md5test_orig.lua
@@ -62,7 +71,7 @@ all: $(MODSO)
 macosx:
 	$(MAKE) all "SOCC=MACOSX_DEPLOYMENT_TARGET=10.4 $(CC) -dynamiclib -single_module -undefined dynamic_lookup"
 
-$(MODNAME).o: $(MODNAME).c $(MODNAME).h
+$(MODNAME).o: $(MODNAME).c $(MODNAME).h $(top_srcdir)/config.h
 	$(CC) $(SOCFLAGS) -c -o $@ $<
 
 $(MODSO): $(MODNAME).o
@@ -70,6 +79,13 @@ $(MODSO): $(MODNAME).o
 
 luainstall: $(MODSO) installpath.lua
 	$(INSTALL) $< `$(INSTALLPATH) $(MODNAME)`
+
+install-exec-hook:
+	$(LIBTOOL) --finish $(pkglibdir)
+
+## Leaving installation of documentation out for now, as that would require
+## an uninstall-hook to get rid of it, but for some reason adding an
+## uninstall-hook makes the installation in the first place fail...
 
 test: $(MODSO) $(check_SCRIPTS)
 	@$(LUA) bittest.lua && echo "basic test OK"
