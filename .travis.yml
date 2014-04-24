@@ -24,7 +24,7 @@ matrix:
 install:
   - git clone git://github.com/LuaDist/Tools.git ~/_tools
   - ~/_tools/travis/travis install
-  - "sudo apt-get install lua5.1 lua5.1-doc"
+  - "sudo apt-get install lua5.1 lua5.1-doc liblua5.1-0 liblua5.1-0-dbg liblua5.1-0-dev"
 
 # Bootstap
 before_script:
@@ -32,7 +32,7 @@ before_script:
 
 # Build the module
 script:
-  - ~/_tools/travis/travis build || (pwd && ./configure && make)
+  - ~/_tools/travis/travis build || (pwd && echo "PKG_CONFIG_PATH is ${PKG_CONFIG_PATH}" && ./configure && make)
 
 # Execute additional tests or commands
 after_script:
