@@ -143,14 +143,14 @@ am__installdirs = "$(DESTDIR)$(pkglibdir)" \
 	"$(DESTDIR)$(pkgincludedir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 bit_la_LIBADD =
-am_bit_la_OBJECTS = bit.lo
+am_bit_la_OBJECTS = bit_la-bit.lo
 bit_la_OBJECTS = $(am_bit_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
 bit_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(bit_la_CFLAGS) $(CFLAGS) \
 	$(bit_la_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -390,6 +390,7 @@ MODSO = $(MODNAME).so
 pkglib_LTLIBRARIES = bit.la
 bit_la_SOURCES = bit.c bit.h
 pkginclude_HEADERS = bit.h
+bit_la_CFLAGS = -fPIC $(CCWARN)
 bit_la_LDFLAGS = -module
 EXTRA_DIST = doc bittest_orig.lua nsievebits_orig.lua md5test_orig.lua \
 	cmake CMakeLists.txt bit.def msvcbuild.bat msvctest.bat \
@@ -498,7 +499,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bit.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bit_la-bit.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -520,6 +521,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+bit_la-bit.lo: bit.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bit_la_CFLAGS) $(CFLAGS) -MT bit_la-bit.lo -MD -MP -MF $(DEPDIR)/bit_la-bit.Tpo -c -o bit_la-bit.lo `test -f 'bit.c' || echo '$(srcdir)/'`bit.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/bit_la-bit.Tpo $(DEPDIR)/bit_la-bit.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='bit.c' object='bit_la-bit.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(bit_la_CFLAGS) $(CFLAGS) -c -o bit_la-bit.lo `test -f 'bit.c' || echo '$(srcdir)/'`bit.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

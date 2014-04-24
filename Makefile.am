@@ -38,6 +38,7 @@ bit_la_SOURCES = bit.c bit.h
 
 pkginclude_HEADERS = bit.h
 
+bit_la_CFLAGS = -fPIC $(CCWARN)
 bit_la_LDFLAGS = -module
 
 EXTRA_DIST = doc

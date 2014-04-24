@@ -33,7 +33,7 @@ before_script:
 # Build the module
 script:
   - "export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}"
-  - ~/_tools/travis/travis build || (pwd && echo "PKG_CONFIG_PATH is ${PKG_CONFIG_PATH}" && ./configure && make)
+  - ~/_tools/travis/travis build || (pwd && echo "PKG_CONFIG_PATH is ${PKG_CONFIG_PATH}" && ./configure --with-pic && make)
 
 # Execute additional tests or commands:
 after_script:
