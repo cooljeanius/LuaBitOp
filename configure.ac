@@ -58,7 +58,9 @@ PKG_CHECK_MODULES([LUA],
                      AC_SUBST([LUA51_LIBS])
   ])
 ])
-AC_CHECK_LIB([lua],[luaL_error])
+AC_CHECK_LIB([lua],[luaL_error],[],[
+  AC_SEARCH_LIBS([luaL_error],[lua lua5.1 lua5.2 luajit])
+])
 
 # Checks for header files.
 AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h stdio.h])
