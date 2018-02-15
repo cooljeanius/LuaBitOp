@@ -1,5 +1,5 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
+dnl#                                               -*- Autoconf -*-
+dnl# Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
 AC_INIT([LuaBitOp],[1.0.2],[web-08@luajit.org])
@@ -25,8 +25,9 @@ AC_PROG_MKDIR_P
 AC_PROG_INSTALL
 AM_PROG_INSTALL_STRIP
 AC_DEFUN([AC_REQUIRE_RANLIB],[
-  AC_REQUIRE([AC_PROG_RANLIB])
-])
+  AC_REQUIRE([AC_PROG_RANLIB])dnl
+])dnl
+  ## https://savannah.gnu.org/support/?108503
 if test "x${RANLIB}" = "x"; then
   test -z "${RANLIB}"
   AC_REQUIRE_RANLIB
@@ -45,7 +46,7 @@ PKG_CHECK_MODULES([LUA],
                    CFLAGS="${CFLAGS} ${LUA_CFLAGS}"
                    CPPFLAGS="${CPPFLAGS} ${LUA_CFLAGS}"
                    LIBS="${LIBS} ${LUA_LIBS}"
-                   AC_SUBST([LUA_CFLAGS])
+                   AC_SUBST([LUA_CFLAGS])dnl
                    AC_SUBST([LUA_LIBS])],[
   # If the previous check failed, see if the pkg name includes the version:
   PKG_CHECK_MODULES([LUA51],
@@ -54,13 +55,14 @@ PKG_CHECK_MODULES([LUA],
                      CFLAGS="${CFLAGS} ${LUA51_CFLAGS}"
                      CPPFLAGS="${CPPFLAGS} ${LUA51_CFLAGS}"
                      LIBS="${LIBS} ${LUA51_LIBS}"
-                     AC_SUBST([LUA51_CFLAGS])
-                     AC_SUBST([LUA51_LIBS])
-  ])
-])
+                     AC_SUBST([LUA51_CFLAGS])dnl
+                     AC_SUBST([LUA51_LIBS])dnl
+  ])dnl
+])dnl
+  ## Check like this too:
 AC_CHECK_LIB([lua],[luaL_error],[],[
-  AC_SEARCH_LIBS([luaL_error],[lua lua5.1 lua5.2 luajit])
-])
+  AC_SEARCH_LIBS([luaL_error],[lua lua5.1 lua5.2 luajit])dnl
+])dnl
 
 # Checks for header files.
 AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h stdio.h])
@@ -74,12 +76,13 @@ AC_TYPE_INT32_T
 AC_TYPE_SIZE_T
 AC_TYPE_UINT32_T
 AC_TYPE_UINT64_T
-AC_CHECK_TYPE([lua_State])
+AC_CHECK_TYPE([lua_State])dnl
 
 # Checks for library functions.
 AC_CHECK_FUNCS([luaL_error lua_pushlstring lua_pushnumber \
                 luaL_checknumber lua_gettop luaL_setfuncs lua_createtable \
-                lua_type])
+                lua_type])dnl
 
+# Output.
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

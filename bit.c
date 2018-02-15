@@ -78,13 +78,15 @@ static UBits barg(lua_State *L, int idx)
 #else
   bn.n = luaL_checknumber(L, idx);
 #endif /* LUA_VERSION_NUM */
-#if defined(LUA_NUMBER_DOUBLE)
+#if defined(LUA_NUMBER_DOUBLE) || \
+    (defined(LUA_FLOAT_TYPE) && defined(LUA_FLOAT_DOUBLE) && \
+     (LUA_FLOAT_TYPE == LUA_FLOAT_DOUBLE))
   bn.n += 6755399441055744.0;  /* 2^52+2^51 */
-#ifdef SWAPPED_DOUBLE
+# ifdef SWAPPED_DOUBLE
   b = (UBits)(bn.b >> 32);
-#else
+# else
   b = (UBits)bn.b;
-#endif /* SWAPPED_DOUBLE */
+# endif /* SWAPPED_DOUBLE */
 #elif defined(LUA_NUMBER_INT) || defined(LUA_NUMBER_LONG) || \
       defined(LUA_NUMBER_LONGLONG) || defined(LUA_NUMBER_LONG_LONG) || \
       defined(LUA_NUMBER_LLONG)
