@@ -35,7 +35,7 @@ else
   test ! -z "${RANLIB}" && export RANLIB
   AC_SUBST([RANLIB])
 fi
-AC_PATH_PROGS([LUA],[lua lua5.1 luajit])
+AC_PATH_PROGS([LUA],[lua lua5.1 lua5.2 lua5.3 lua5.4 luajit])
 LT_INIT([win32-dll dlopen])
 CMAKE_FIND_BINARY
 
@@ -61,14 +61,22 @@ PKG_CHECK_MODULES([LUA],
 ])dnl
   ## Check like this too:
 AC_CHECK_LIB([lua],[luaL_error],[],[
-  AC_SEARCH_LIBS([luaL_error],[lua lua5.1 lua5.2 luajit])dnl
+  AC_SEARCH_LIBS([luaL_error],[lua lua5.1 lua5.2 lua5.3 lua5.4 luajit])dnl
 ])dnl
 
 # Checks for header files.
-AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h stdio.h])
+AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h])
 if test "x${ac_cv_header_lua_h}" = "xno"; then
   test ! -z "${ac_cv_header_lua_h}"
   AC_MSG_ERROR([lua.h is required, but it was not found])
+fi
+if test "x${ac_cv_header_stdio_h}" = "x"; then
+  test -z "${ac_cv_header_stdio_h}"
+  AC_CHECK_HEADERS([stdio.h])
+fi
+if test "x${ac_cv_header_stdint_h}" = "x"; then
+  test -z "${ac_cv_header_stdint_h}"
+  AC_CHECK_HEADERS([stdint.h])
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.
