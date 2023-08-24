@@ -38,3 +38,4 @@ cmake_install.cmake
 # Distribution:
 luabitop-*.*.*/*
 *.tar.gz
+.env.local
