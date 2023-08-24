@@ -1,0 +1,45 @@
+name: cooljeanius/LuaBitOp
+on:
+  push:
+    branches:
+    - "**/*"
+    - master
+  pull_request:
+concurrency:
+#   # This item has no matching transformer
+#   maximum_number_of_builds: 0
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+    - run: git clone git://github.com/LuaDist/Tools.git ~/_tools
+    - run: "~/_tools/travis/travis install"
+    - run: sudo apt-get install lua5.1 lua5.1-doc liblua5.1-0 liblua5.1-0-dbg liblua5.1-0-dev
+    - run: "~/_tools/travis/travis bootstrap"
+    - run: export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:${PKG_CONFIG_PATH}
+    - run: ~/_tools/travis/travis build || (pwd && echo "PKG_CONFIG_PATH is ${PKG_CONFIG_PATH}" && ./configure --with-pic && make)
+    - run: "~/_tools/travis/travis test || (test -e Makefile && make check && make distcheck)"
+    - run: test -e Makefile && make check && make distcheck
+      if: "${{ success() }}"
+    - run: test -e config.log && cat config.log
+      if: "${{ failure() }}"
+#     # This item has no matching transformer
+#     - recipients:
+#       - luadist-dev@googlegroups.com
+#     # This item has no matching transformer
+#     - email:
+#         on_success: change
+#         on_failure: always
+    strategy:
+      matrix:
+        TOOL:
+        - gcc
+        - clang
+        - i686-w64-mingw32
+        - x86_64-w64-mingw32
+        - arm-linux-gnueabihf
+#       # 'allow_failures' transformations are currently unsupported.
+    env:
+      TOOL: "${{ matrix.TOOL }}"
