@@ -3,7 +3,9 @@
 #
 
 # We assume C build environments
-language: C
+language: c
+os: linux
+dist: xenial
 
 # Try using multiple Lua Implementations
 env:
@@ -50,10 +52,8 @@ branches:
   only:
     - master
 
-# Notify the LuaDist Dev group if needed
+# Notify... someone(?) if needed
 notifications:
-  recipients:
-    - luadist-dev@googlegroups.com
   email:
     on_success: change
     on_failure: always
