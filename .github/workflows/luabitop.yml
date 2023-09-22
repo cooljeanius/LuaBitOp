@@ -5,9 +5,6 @@ on:
     - "**/*"
     - master
   pull_request:
-concurrency:
-#   # This item has no matching transformer
-#   maximum_number_of_builds: 0
 jobs:
   test:
     runs-on: ubuntu-16.04
