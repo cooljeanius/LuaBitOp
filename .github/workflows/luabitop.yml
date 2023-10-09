@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: checkout
-      uses: actions/checkout@v4.0.0
+      uses: actions/checkout@v4.1.0
     - run: git clone https://github.com/cooljeanius/LuaDistTools.git ~/_tools
     - run: "~/_tools/travis/travis install"
     - run: sudo apt-get install lua5.1 lua5.1-doc liblua5.1-0 liblua5.1-0-dbg liblua5.1-0-dev
