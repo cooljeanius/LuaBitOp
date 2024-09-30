@@ -9,37 +9,37 @@
 /* Define to 1 if you have the <lauxlib.h> header file. */
 #undef HAVE_LAUXLIB_H
 
-/* Define to 1 if you have the `lua' library (-llua). */
+/* Define to 1 if you have the 'lua' library (-llua). */
 #undef HAVE_LIBLUA
 
 /* Define to 1 if you have the <luaconf.h> header file. */
 #undef HAVE_LUACONF_H
 
-/* Define to 1 if you have the `luaL_checknumber' function. */
+/* Define to 1 if you have the 'luaL_checknumber' function. */
 #undef HAVE_LUAL_CHECKNUMBER
 
-/* Define to 1 if you have the `luaL_error' function. */
+/* Define to 1 if you have the 'luaL_error' function. */
 #undef HAVE_LUAL_ERROR
 
-/* Define to 1 if you have the `luaL_setfuncs' function. */
+/* Define to 1 if you have the 'luaL_setfuncs' function. */
 #undef HAVE_LUAL_SETFUNCS
 
-/* Define to 1 if you have the `lua_createtable' function. */
+/* Define to 1 if you have the 'lua_createtable' function. */
 #undef HAVE_LUA_CREATETABLE
 
-/* Define to 1 if you have the `lua_gettop' function. */
+/* Define to 1 if you have the 'lua_gettop' function. */
 #undef HAVE_LUA_GETTOP
 
 /* Define to 1 if you have the <lua.h> header file. */
 #undef HAVE_LUA_H
 
-/* Define to 1 if you have the `lua_pushlstring' function. */
+/* Define to 1 if you have the 'lua_pushlstring' function. */
 #undef HAVE_LUA_PUSHLSTRING
 
-/* Define to 1 if you have the `lua_pushnumber' function. */
+/* Define to 1 if you have the 'lua_pushnumber' function. */
 #undef HAVE_LUA_PUSHNUMBER
 
-/* Define to 1 if you have the `lua_type' function. */
+/* Define to 1 if you have the 'lua_type' function. */
 #undef HAVE_LUA_TYPE
 
 /* Define to 1 if you have the <stdint.h> header file. */
@@ -90,7 +90,7 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
    required in a freestanding environment). This macro is provided for
    backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
@@ -112,7 +112,7 @@
    such a type exists and the standard includes do not define it. */
 #undef int32_t
 
-/* Define to `unsigned int' if <sys/types.h> does not define. */
+/* Define as 'unsigned int' if <stddef.h> doesn't define. */
 #undef size_t
 
 /* Define to the type of an unsigned integer type of width exactly 32 bits if

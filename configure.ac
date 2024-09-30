@@ -15,11 +15,25 @@ AM_MAINTAINER_MODE
 
 # Checks for programs.
 AM_PROG_AR
+if test "x${AR}" = "x"; then
+  test -z "${AR}" || unset AR
+  AC_CHECK_TOOLS([AR],[ar gar])dnl
+  ## might want to switch around these checks...
+  if test "x${ac_cv_prog_AR}" = "x"; then
+    test -z "${ac_cv_prog_AR}" || unset ac_cv_prog_AR
+    m4_ifdef([AC_PROG_AR],[dnl
+      AC_PROG_AR
+    ],[
+      test -x "`which ar`" && echo "using `which ar` for ar"
+    ])
+  fi
+else
+  test -n "${AR}" && export AR
+fi
 AM_PROG_CC_C_O
 AC_PROG_CC_C99
 AC_PROG_CPP
 AC_PROG_CXX
-AC_PROG_GCC_TRADITIONAL
 AC_PROG_LN_S
 AC_PROG_MKDIR_P
 AC_PROG_INSTALL
@@ -29,10 +43,10 @@ AC_DEFUN([AC_REQUIRE_RANLIB],[
 ])dnl
   ## https://savannah.gnu.org/support/?108503
 if test "x${RANLIB}" = "x"; then
-  test -z "${RANLIB}"
+  test -z "${RANLIB}" || unset RANLIB
   AC_REQUIRE_RANLIB
 else
-  test ! -z "${RANLIB}" && export RANLIB
+  test -n "${RANLIB}" && export RANLIB
   AC_SUBST([RANLIB])
 fi
 AC_PATH_PROGS([LUA],[lua lua5.1 lua5.2 lua5.3 lua5.4 luajit])
@@ -67,15 +81,15 @@ AC_CHECK_LIB([lua],[luaL_error],[],[
 # Checks for header files.
 AC_CHECK_HEADERS([lua.h luaconf.h lauxlib.h])
 if test "x${ac_cv_header_lua_h}" = "xno"; then
-  test ! -z "${ac_cv_header_lua_h}"
+  test -n "${ac_cv_header_lua_h}" && echo "ac_cv_header_lua_h is '${ac_cv_header_lua_h}'"
   AC_MSG_ERROR([lua.h is required, but it was not found])
 fi
 if test "x${ac_cv_header_stdio_h}" = "x"; then
-  test -z "${ac_cv_header_stdio_h}"
+  test -z "${ac_cv_header_stdio_h}" || unset ac_cv_header_stdio_h
   AC_CHECK_HEADERS([stdio.h])
 fi
 if test "x${ac_cv_header_stdint_h}" = "x"; then
-  test -z "${ac_cv_header_stdint_h}"
+  test -z "${ac_cv_header_stdint_h}" || unset ac_cv_header_stdint_h
   AC_CHECK_HEADERS([stdint.h])
 fi
 
